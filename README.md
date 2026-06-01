@@ -4,7 +4,7 @@
 
 Download MP4 videos and MP3 audio from YouTube, TikTok, Instagram, Twitter/X, Vimeo, Reddit, and 1000+ other sites. No API keys, no sign-in, no ads.
 
-![video downloader Preview](https://via.placeholder.com/800x450/050508/00f5ff?text=all+video+downloader)
+
 
 ---
 
