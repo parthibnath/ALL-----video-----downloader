@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>ALL VIDEO DOWNLOADER</title>
+    <meta name="description" content="ALL VIDEO DOWNLOADER — free video downloader. MP4 & MP3 from YouTube, TikTok, Instagram and 1000+ sites." />
+    <meta name="author" content="Parthib Nath" />
+    <meta name="theme-color" content="#E50914" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@400;600;700;800&display=swap" rel="stylesheet" />
+    <style>
+      *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+      html { scroll-behavior: smooth; }
+      body {
+        background: #000;
+        color: #fff;
+        font-family: 'Inter', sans-serif;
+        -webkit-font-smoothing: antialiased;
+        overflow-x: hidden;
+      }
+      #root { min-height: 100vh; }
+
+      /* ── LAUNCH SCREEN ── */
+      #launch {
+        position: fixed; inset: 0; z-index: 99999;
+        background: #000;
+        display: flex; flex-direction: column;
+        align-items: center; justify-content: center; gap: 24px;
+        transition: opacity 0.55s ease;
+      }
+      #launch.out { opacity: 0; pointer-events: none; }
+
+      .l-logo {
+        width: 88px; height: 88px; border-radius: 22px;
+        background: #E50914;
+        display: flex; align-items: center; justify-content: center;
+        box-shadow: 0 0 0 0 rgba(229,9,20,0.7);
+        animation: lPulse 1.8s ease-in-out infinite;
+      }
+      @keyframes lPulse {
+        0%   { box-shadow: 0 0 30px rgba(229,9,20,0.6); }
+        50%  { box-shadow: 0 0 80px rgba(229,9,20,0.9), 0 0 160px rgba(229,9,20,0.3); }
+        100% { box-shadow: 0 0 30px rgba(229,9,20,0.6); }
+      }
+
+      .l-title {
+        font-family: 'Space Grotesk', sans-serif;
+        font-size: 20px; font-weight: 800; letter-spacing: 3px;
+        color: #fff; text-align: center;
+      }
+      .l-title span { color: #E50914; }
+
+      .l-bar { width: 200px; height: 2px; background: #1a1a1a; border-radius: 99px; overflow: hidden; }
+      .l-fill {
+        height: 100%; width: 0; background: #E50914; border-radius: 99px;
+        animation: lFill 2.8s cubic-bezier(0.4,0,0.2,1) forwards;
+      }
+      @keyframes lFill { to { width: 100%; } }
+
+      .l-sub {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 11px; color: rgba(255,255,255,0.25);
+        letter-spacing: 2px; text-transform: uppercase;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="launch">
+      <div class="l-logo">
+        <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+          <polyline points="7 10 12 15 17 10"/>
+          <line x1="12" y1="15" x2="12" y2="3"/>
+        </svg>
+      </div>
+      <div class="l-title">ALL VIDEO <span>DOWNLOADER</span></div>
+      <div class="l-bar"><div class="l-fill"></div></div>
+      <div class="l-sub">Free &nbsp;·&nbsp; No Sign-In &nbsp;·&nbsp; 1000+ Sites</div>
+    </div>
+
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+    <script>
+      setTimeout(function() {
+        var el = document.getElementById('launch');
+        if (el) { el.classList.add('out'); setTimeout(function(){ el && el.remove(); }, 580); }
+      }, 3200);
+    </script>
+  </body>
+</html>

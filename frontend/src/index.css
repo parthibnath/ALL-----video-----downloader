@@ -1,0 +1,123 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --red:       #E50914;
+    --dark-red:  #B20710;
+    --red-glow:  rgba(229, 9, 20, 0.5);
+  }
+
+  * { scrollbar-width: thin; scrollbar-color: #E50914 transparent; }
+  *::-webkit-scrollbar { width: 4px; }
+  *::-webkit-scrollbar-track { background: transparent; }
+  *::-webkit-scrollbar-thumb { background: #E50914; border-radius: 2px; }
+  ::selection { background: rgba(229,9,20,0.3); color: #ff6b6b; }
+}
+
+@layer components {
+
+  /* Glass panels — exactly like screenshot: very dark, slight border */
+  .glass {
+    background: rgba(10, 10, 10, 0.9);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255,255,255,0.07);
+  }
+  .glass-light {
+    background: rgba(18, 18, 18, 0.8);
+    border: 1px solid rgba(255,255,255,0.05);
+  }
+
+  /* Red gradient text — used on "DOWNLOADER" */
+  .nf-text, .ig-text, .gradient-text {
+    background: linear-gradient(135deg, #E50914 0%, #ff2a2a 50%, #E50914 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Red gradient background */
+  .nf-gradient, .ig-gradient {
+    background: linear-gradient(135deg, #E50914, #B20710);
+  }
+
+  /* Red glow shadow */
+  .shadow-ig, .shadow-nf {
+    box-shadow: 0 4px 20px rgba(229,9,20,0.45);
+  }
+
+  /* ── ANALYZE BUTTON — red rounded pill matching screenshot ── */
+  .btn-primary, .btn-holo {
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(135deg, #E50914, #B20710);
+    color: #fff !important;
+    border: none;
+    border-radius: 10px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow:
+      0 4px 0 #7a0008,
+      0 6px 20px rgba(229,9,20,0.45),
+      inset 0 1px 0 rgba(255,255,255,0.18);
+  }
+  /* Glare sweep on hover */
+  .btn-primary::after, .btn-holo::after {
+    content: '';
+    position: absolute;
+    top: -50%; left: -70%; width: 40%; height: 200%;
+    background: linear-gradient(105deg, transparent 0%, rgba(255,255,255,0.06) 40%, rgba(255,255,255,0.22) 50%, rgba(255,255,255,0.06) 60%, transparent 100%);
+    transform: skewX(-15deg);
+    transition: left 0.5s ease;
+    pointer-events: none;
+  }
+  .btn-primary:hover, .btn-holo:hover {
+    transform: translateY(-2px);
+    box-shadow:
+      0 6px 0 #7a0008,
+      0 10px 30px rgba(229,9,20,0.6),
+      inset 0 1px 0 rgba(255,255,255,0.22);
+  }
+  .btn-primary:hover::after, .btn-holo:hover::after { left: 120%; }
+  .btn-primary:active, .btn-holo:active {
+    transform: translateY(2px);
+    box-shadow: 0 2px 0 #7a0008, 0 4px 12px rgba(229,9,20,0.4);
+  }
+
+  /* Input focus ring */
+  input:focus {
+    outline: none;
+    border-color: rgba(229,9,20,0.5) !important;
+    box-shadow: 0 0 0 3px rgba(229,9,20,0.1) !important;
+  }
+
+  /* Skeleton shimmer */
+  .skeleton {
+    background: linear-gradient(90deg, #111 25%, #1a1a1a 50%, #111 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.8s linear infinite;
+  }
+}
+
+/* ── KEYFRAMES ── */
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+@keyframes bounce {
+  0%, 80%, 100% { transform: scale(0); }
+  40% { transform: scale(1); }
+}
+
+.orb {
+  border-radius: 50%;
+  filter: blur(100px);
+  position: absolute;
+  pointer-events: none;
+}

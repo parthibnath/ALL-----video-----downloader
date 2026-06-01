@@ -1,0 +1,36 @@
+# render.yaml - StreamDrop deployment config for Render
+# Deploy at: https://dashboard.render.com/
+
+services:
+  # Backend API
+  - type: web
+    name: streamdrop-api
+    runtime: docker
+    dockerfilePath: ./backend/Dockerfile
+    plan: free
+    region: oregon
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 3001
+      - key: ALLOWED_ORIGINS
+        value: https://streamdrop.vercel.app  # Update with your frontend URL
+      - key: YT_DLP_TIMEOUT
+        value: 30000
+
+  # Optional: serve frontend as static site on Render
+  # (Or use Vercel/Netlify for better CDN performance)
+  - type: web
+    name: streamdrop-frontend
+    runtime: static
+    buildCommand: cd frontend && npm install && npm run build
+    staticPublishPath: ./frontend/dist
+    pullRequestPreviewsEnabled: false
+    envVars:
+      - key: VITE_API_URL
+        value: https://streamdrop-api.onrender.com/api
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
